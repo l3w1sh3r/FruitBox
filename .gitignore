@@ -39,3 +39,32 @@
 
 # debug information files
 *.dwo
+
+# ---- Debug/Release folders ----
+/build/
+/bin/
+/debug/
+/release/
+
+# ---- External libraries ----
+/external/
+
+# ---- VS Code ----
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/c_cpp_properties.json
+
+# ---- Logs / Temporary files ----
+*.log
+*.tmp
+*.cache
+*.swp
+*.DS_Store
+Thumbs.db
+
+# ---- CMake ----
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
