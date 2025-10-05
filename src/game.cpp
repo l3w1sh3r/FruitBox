@@ -56,8 +56,12 @@ bool Game::init(const string &title, int width, int height)
         return false;
     }
 
-    // create test apple
-    testApple = new Apple(5, 0, 0, 200.0f, 200.0f, renderer, appleTexture, font);
+    // Create grid: 8x8, each cell 64px, start drawing from (100,100)
+    grid = new Grid(renderer, appleTexture, font);
+
+    inputManager = new InputManager();
+
+    selectionBox = new SelectionBox(renderer);
 
     isRunning = true;
     return true;
@@ -82,6 +86,23 @@ void Game::handleEvents()
         if (event.type == SDL_QUIT)
         {
             isRunning = false;
+        }
+        if (inputManager)
+        {
+            inputManager->handleEvent(event);
+        }
+
+        if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+        {
+            selectionBox->startSelection(Vector2D((float)event.button.x, (float)event.button.y));
+        }
+        else if (event.type == SDL_MOUSEMOTION)
+        {
+            selectionBox->updateSelection(Vector2D((float)event.motion.x, (float)event.motion.y));
+        }
+        else if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+        {
+            selectionBox->endSelection();
         }
         // Handle other events based on current state
         else if (event.type == SDL_KEYDOWN)
@@ -142,8 +163,15 @@ void Game::render()
     case GameState::PLAYING:
     {
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Green
-        if (testApple)
-            testApple->render();
+
+        if (grid)
+        {
+            grid->render();
+        }
+        if (selectionBox)
+        {
+            selectionBox->render();
+        }
         break;
     }
     case GameState::GAME_OVER:
@@ -186,6 +214,21 @@ void Game::clean()
     {
         TTF_CloseFont(font);
         font = nullptr;
+    }
+    if (grid)
+    {
+        delete grid;
+        grid = nullptr;
+    }
+    if (inputManager)
+    {
+        delete inputManager;
+        inputManager = nullptr;
+    }
+    if (selectionBox)
+    {
+        delete selectionBox;
+        selectionBox = nullptr;
     }
     TTF_Quit();
     SDL_Quit();

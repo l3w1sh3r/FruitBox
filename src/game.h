@@ -7,6 +7,9 @@
 #include "core/apple.h"
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include "core/grid.h"
+#include "system/inputManager.h"
+#include "core/selectionBox.h"
 
 enum class GameState
 {
@@ -28,6 +31,12 @@ private:
     Apple *testApple = nullptr;
     SDL_Texture *appleTexture = nullptr;
     TTF_Font *font = nullptr;
+
+    Grid *grid = nullptr;
+
+    InputManager *inputManager = nullptr;
+
+    SelectionBox *selectionBox = nullptr;
 
 public:
     Game();
