@@ -3,8 +3,8 @@
 #define GAMEBOARD_H
 
 #include <SDL.h>
-#include "graphics.h"
-#include "defs.h"
+#include "../system/graphics.h"
+#include "../utils/defs.h"
 
 class GameBoard
 {

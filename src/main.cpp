@@ -1,11 +1,11 @@
 #include <SDL.h>
 #include <iostream>
-#include "graphics.h"
-#include "logic.h"
-#include "defs.h"
+#include "system/graphics.h"
+#include "core/logic.h"
+#include "utils/defs.h"
 #include "game.h"
-#include "menu.h"
-#include "gameboard.h"
+#include "system/menu.h"
+#include "core/gameboard.h"
 
 int main(int argc, char *argv[])
 {

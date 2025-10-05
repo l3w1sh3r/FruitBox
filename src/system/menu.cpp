@@ -3,7 +3,7 @@
 
 Menu::Menu(Graphics &graphics) : graphics(graphics)
 {
-    background = graphics.loadTexture("assets/images/FruitBoxBackground.png");
+    background = graphics.loadTexture("assets/images/menuBackground.png");
     playButton = graphics.loadTexture("assets/images/appleWithLeaf.png");
 
     if (!background || !playButton)

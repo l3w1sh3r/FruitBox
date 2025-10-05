@@ -1,5 +1,5 @@
 #include "graphics.h"
-#include "defs.h"
+#include "../utils/defs.h"
 
 Graphics::Graphics() : window(nullptr), renderer(nullptr) {}
 Graphics::~Graphics()

@@ -3,11 +3,11 @@
 
 GameBoard::GameBoard(Graphics &graphics) : graphics(graphics)
 {
-    background = graphics.loadTexture("assets/images/FruitBoxBackground.png");
+    background = graphics.loadTexture("assets/images/ingameSquareBackground.png");
     apple = graphics.loadTexture("assets/images/appleWithoutLeaf.png");
     if (!apple || !background)
     {
-        std::cerr << "Failed to load apple texture for GameBoard!" << std::endl;
+        std::cerr << "Failed to load texture for GameBoard!" << std::endl;
     }
 }
 
