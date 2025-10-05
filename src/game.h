@@ -4,6 +4,9 @@
 
 #include <SDL.h>
 #include <string>
+#include "core/apple.h"
+#include <SDL_ttf.h>
+#include <SDL_image.h>
 
 enum class GameState
 {
@@ -20,6 +23,11 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     GameState currentState;
+
+    // test apple
+    Apple *testApple = nullptr;
+    SDL_Texture *appleTexture = nullptr;
+    TTF_Font *font = nullptr;
 
 public:
     Game();
