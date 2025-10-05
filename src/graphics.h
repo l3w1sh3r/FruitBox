@@ -1,9 +1,12 @@
+// screen rendering and drawing
+
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
 #include <iostream>
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
 
 using namespace std;
 
@@ -29,6 +32,7 @@ public:
     {
         return renderer;
     };
+    SDL_Texture *loadTexture(const string &filePath);
 
 private:
     SDL_Window *window;

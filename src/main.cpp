@@ -3,34 +3,54 @@
 #include "graphics.h"
 #include "logic.h"
 #include "defs.h"
+#include "game.h"
+#include "menu.h"
+#include "gameboard.h"
 
 int main(int argc, char *argv[])
 {
     Graphics graphics;
     if (!graphics.init("FruitBox", SCREEN_HEIGHT, SCREEN_WIDTH))
     {
-        return 1;
+        cout << "Failed to initialize graphics!" << endl;
+        return -1;
     }
 
-    Logic logic;
-    bool quit = false;
+    bool running = true;
     SDL_Event e;
+    GameState state = GameState::MAIN_MENU;
 
-    while (!quit)
+    Menu menu(graphics);
+    GameBoard board(graphics);
+
+    while (running)
     {
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
             {
-                quit = true;
+                running = false;
             }
-            logic.handleEvent(e);
+
+            if (state == GameState::MAIN_MENU)
+            {
+                if (menu.handleEvent(e))
+                {
+                    state = GameState::PLAYING;
+                }
+            }
         }
 
-        logic.update();
-
         graphics.clear();
-        graphics.drawBoard();
+
+        if (state == GameState::MAIN_MENU)
+        {
+            menu.render();
+        }
+        else if (state == GameState::PLAYING)
+        {
+            board.render();
+        }
         graphics.present();
     }
 

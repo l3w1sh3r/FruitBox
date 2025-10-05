@@ -1,3 +1,5 @@
+// game logic, scoring
+
 #ifndef LOGIC_H
 #define LOGIC_H
 

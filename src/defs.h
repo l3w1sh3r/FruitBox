@@ -1,3 +1,5 @@
+// definitions and constants
+
 #ifndef DEFS_H
 #define DEFS_H
 
@@ -6,7 +8,7 @@
 #define SCREEN_HEIGHT 600
 
 // Board settings
-#define BOARD_COLS 6
+#define BOARD_COLS 8
 #define BOARD_ROWS 8
 #define CELL_SIZE 64
 

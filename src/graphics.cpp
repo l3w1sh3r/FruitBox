@@ -14,6 +14,11 @@ bool Graphics::init(const string &title, int width, int height)
         cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
         return false;
     }
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+    {
+        cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+        return false;
+    }
     window = SDL_CreateWindow(title.c_str(),
                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               width, height, SDL_WINDOW_SHOWN);
@@ -80,3 +85,13 @@ void Graphics::drawBoard()
         SDL_RenderDrawLine(renderer, BOARD_X, y, BOARD_X + BOARD_WIDTH, y);
     }
 }
+
+SDL_Texture *Graphics::loadTexture(const string &filePath)
+{
+    SDL_Texture *newTexture = IMG_LoadTexture(renderer, filePath.c_str());
+    if (!newTexture)
+    {
+        cout << "Unable to load texture! SDL_Error: " << IMG_GetError() << endl;
+    }
+    return newTexture;
+};
