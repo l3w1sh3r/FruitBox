@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include "utils/config.h"
+#include "core/gameLogic.h"
 
 using namespace std;
 
@@ -9,6 +10,8 @@ Game::~Game()
 {
     clean();
 }
+
+GameLogic *gameLogic = nullptr;
 
 bool Game::init(const string &title, int width, int height)
 {
@@ -38,6 +41,7 @@ bool Game::init(const string &title, int width, int height)
         return false;
     }
 
+    gameLogic = new GameLogic();
     // load apple image
     SDL_Surface *tempSurface = IMG_Load(IMAGES_PATH "/appleWithoutLeaf.png");
     if (!tempSurface)
@@ -108,9 +112,18 @@ void Game::handleEvents()
             if (currentState == GameState::PLAYING)
             {
                 auto selectedApples = selectionBox->getSelectedApples(grid);
-                cout << "Number of selected apples: " << selectedApples.size() << endl;
                 int sum = selectionBox->calculateSelectedSum(selectedApples);
-                cout << "Sum of selected apples: " << sum << endl;
+
+                if (gameLogic->validateSelection(sum))
+                {
+                    gameLogic->clearApples(selectedApples);
+                    gameLogic->addScore((int)selectedApples.size());
+                    gameLogic->refillGrid(*grid);
+                }
+                else
+                {
+                    cout << "Invalid selection. Sum: " << sum << endl;
+                }
             }
         }
         // Handle other events based on current state
@@ -191,9 +204,6 @@ void Game::render()
         break;
     }
 
-    SDL_Rect rect = {300, 300, 200, 200};
-    SDL_RenderFillRect(renderer, &rect);
-
     SDL_RenderPresent(renderer);
 }
 
@@ -238,6 +248,11 @@ void Game::clean()
     {
         delete selectionBox;
         selectionBox = nullptr;
+    }
+    if (gameLogic)
+    {
+        delete gameLogic;
+        gameLogic = nullptr;
     }
     TTF_Quit();
     SDL_Quit();

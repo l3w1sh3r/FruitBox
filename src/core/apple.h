@@ -25,9 +25,10 @@ public:
     ~Apple();
 
     void render();
-    void collect() { isActive = false; } // mark as collected
     bool getIsActive() const { return isActive; }
     int getValue() const { return value; }
+    void setValue(int val) { value = val; }
+    void setActive(bool active) { isActive = active; }
     int getRow() const { return row; }
     int getCol() const { return col; }
     float getX() const { return x; }

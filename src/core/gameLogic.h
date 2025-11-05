@@ -21,6 +21,7 @@ public:
     void clearApples(vector<Apple *> &apples); // clear selected apples if sum == 10
     void addScore(int points);
     int getScore() const { return score; }
+    void refillGrid(class Grid &grid); // refill grid after clearing apples
 };
 
 #endif // GAMELOGIC_H
