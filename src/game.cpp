@@ -103,6 +103,15 @@ void Game::handleEvents()
         else if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
             selectionBox->endSelection();
+
+            // Get selected apples
+            if (currentState == GameState::PLAYING)
+            {
+                auto selectedApples = selectionBox->getSelectedApples(grid);
+                cout << "Number of selected apples: " << selectedApples.size() << endl;
+                int sum = selectionBox->calculateSelectedSum(selectedApples);
+                cout << "Sum of selected apples: " << sum << endl;
+            }
         }
         // Handle other events based on current state
         else if (event.type == SDL_KEYDOWN)

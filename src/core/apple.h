@@ -30,6 +30,8 @@ public:
     int getValue() const { return value; }
     int getRow() const { return row; }
     int getCol() const { return col; }
+    float getX() const { return x; }
+    float getY() const { return y; }
 };
 
 #endif // APPLE_H

@@ -6,8 +6,11 @@
 #include <SDL.h>
 #include <algorithm>
 #include "../utils/vector2d.h"
+#include "grid.h"
 
 using namespace std;
+
+class Apple; // forward declaration
 
 class SelectionBox
 {
@@ -34,6 +37,10 @@ public:
     float getRight() const { return max(startPoint.x, endPoint.x); }
     float getTop() const { return min(startPoint.y, endPoint.y); }
     float getBottom() const { return max(startPoint.y, endPoint.y); }
+
+    vector<Apple *> getSelectedApples(Grid *grid);
+
+    int calculateSelectedSum(const vector<Apple *> &selectedApples);
 };
 
 #endif // SELECTIONBOX_H
